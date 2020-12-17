@@ -28,9 +28,9 @@ pipeline {
   }
 
   // Steps that run after the pipeline stages complete
-  post {
-    failure {
-        // TODO notify?
-    }
-  }
+  // post {
+  //  failure {
+  //      // TODO notify?
+  //  }
+  // }
 }
