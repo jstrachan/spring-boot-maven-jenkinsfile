@@ -1,35 +1,16 @@
 pipeline {
   agent {
     kubernetes {
-      yaml '''
-  spec:
-  containers:
-  - name: jnlp
-  - name: jdk
-    image: openjdk:11-jdk
-    command:
-    - cat
-    tty: true
-      '''
+      yamlFile 'jenkins-pod.yaml'
     }
   }
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
   stages {
-    stage('Build') {
+    stage('Run maven') {
       steps {
-        container ('jdk') {
-          sh './mvnw package'
+        container('maven') {
+          sh 'mvn package'
         }
       }
     }
   }
-
-  // Steps that run after the pipeline stages complete
-  // post {
-  //  failure {
-  //      // TODO notify?
-  //  }
-  // }
 }
