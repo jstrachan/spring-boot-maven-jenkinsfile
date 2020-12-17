@@ -1,7 +1,6 @@
 pipeline {
   agent {
     kubernetes {
-      label 'customer-portal-app'
       yaml '''
   spec:
   containers:
